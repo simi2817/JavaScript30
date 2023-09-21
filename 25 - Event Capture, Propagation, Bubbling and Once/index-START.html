@@ -41,9 +41,23 @@
   }
 </style>
 
-<button></button>
+<button id="button">Click Me</button>
 <script>
-
+  const divs = document.querySelectorAll('div');
+  divs.forEach(div => div.addEventListener('click', logText, {
+    capture: false, //bubbles from down to up
+    once: true //event happens only once
+  }));
+  function logText(e) {
+    console.log(this.classList.value);
+    e.stopPropagation(); //stops bubbling
+  }
+  const button = document.querySelector('#button');
+  button.addEventListener('click', () => {
+    console.log('Clicked!');
+  }, {
+    once: true
+  });
 </script>
 </body>
 </html>
